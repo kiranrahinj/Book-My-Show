@@ -8,6 +8,8 @@ import Poster from '../poster/poster.component'
 
 
 const PosterSlider = (props) => {
+const SliderConfig= props.config ? props.config : settings;
+
     return (
         <>
   <div className="flex flex-col items-start my-2">
@@ -26,7 +28,7 @@ const PosterSlider = (props) => {
           {props.subtitle}
         </p>
       </div>
-      <Slider {...settings}>
+      <Slider {...SliderConfig}>
         {props.images.map((image) => (
           <Poster {...image} isDark={props.isDark} />
         ))}

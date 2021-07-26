@@ -13,6 +13,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 
+import Play from "./component/pages/plays.page";
+
+
+
+
 
 
 
@@ -21,7 +26,7 @@ function App() {
     <>
     <DefaultHOC path="/" exact component={HomePage}/>
     <MovieHOC path="/movie/:id" exact component={Movie}/>
-    
+    <DefaultHOC path="/plays" exact component={Play}/>
     </>
   )
 }

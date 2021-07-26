@@ -33,10 +33,19 @@ const HomePage = () => {
         </div>
       </div>
 
-    <div className="container mx-auto px-4 ">
-       <div> <PosterSlider images={PremierImages} title={"Online Streaming Event"} /></div>
-        <div className="mt-20"> <PosterSlider images={PremierImages} title={"Outdoor Events"} /></div>
-    </div>
+      <div className="container mx-auto px-4 ">
+        <div>
+          
+          <PosterSlider
+            images={PremierImages}
+            title={"Online Streaming Event"}
+          />
+        </div>
+        <div className="mt-20">
+          
+          <PosterSlider images={PremierImages} title={"Outdoor Events"} />
+        </div>
+      </div>
     </>
   );
 };

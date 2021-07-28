@@ -57,7 +57,7 @@ const Movie = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 3,
-    initialSlide: 0,
+    initialSlide: 3,
     responsive: [
       {
         breakpoint: 1024,
@@ -80,6 +80,7 @@ const Movie = () => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
+          initialSlide: 2,
         },
       },
     ],
@@ -91,7 +92,7 @@ const Movie = () => {
     speed: 500,
     slidesToShow: 7,
     slidesToScroll: 3,
-    initialSlide: 0,
+    initialSlide: 3,
     responsive: [
       {
         breakpoint: 1024,
@@ -114,6 +115,7 @@ const Movie = () => {
         settings: {
           slidesToShow: 4,
           slidesToScroll: 2,
+          initialSlide: 2,
         },
       },
     ],

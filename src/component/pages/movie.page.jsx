@@ -1,5 +1,5 @@
-import React from "react";
-import { FaCcVisa } from "react-icons/fa";
+import React,{useContext} from "react";
+
 import Cast from "../cast/cast.component";
 import MovieHero from "../MovieHero/Movie.hero.component";
 
@@ -7,7 +7,13 @@ import MovieHero from "../MovieHero/Movie.hero.component";
 import PosterSlider from "../posterSlider/posterSlider.component";
 import images from "../config/images.config";
 
+
+//context
+import { MovieContext } from "../../context/movieContext";
+
 const Movie = () => {
+const {movie}=useContext(MovieContext)
+
   const settings = {
     infinite: false,
     speed: 500,
@@ -48,9 +54,7 @@ const Movie = () => {
       <div className="container lg:w-2/3 lg:ml-16 p-2 ">
         <h1 className="text-2xl font-bold mb-2">About the movie</h1>
         <p className=" font-normal  ">
-          Bruce Wayne and Diana Prince try to bring the metahumans of Earth
-          together after the death of Clark Kent. Meanwhile, Darkseid sends
-          Steppenwolf to Earth with an army to subjugate humans.
+          {movie.overview}
         </p>
 
         <div className="my-5">

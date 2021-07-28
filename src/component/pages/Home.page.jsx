@@ -1,12 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import EntertainmentCardSlider from "../entertainment card/entertainmentCard.component";
 
 //
 import PosterSlider from "../posterSlider/posterSlider.component";
 import PremierImages from "../config/images.config";
+import axios from "axios";
 
 const HomePage = () => {
+
+
+  const [popularMovies, setPopularMovies] = useState([]);
+
+  useEffect(() => {
+    const reqPopularMovies = async () => {
+      const getPopularMovies = await axios.get("/movie/popular");
+      setPopularMovies(getPopularMovies.data.results);
+    };
+        reqPopularMovies();
+  }, []);
+
+
+  const [upcomingMovies, setupcomingMovies] = useState([]);
+
+  useEffect(() => {
+    const reqUpcomingMovies = async () => {
+      const getupcomingMovies = await axios.get("/movie/upcoming");
+      setupcomingMovies(getupcomingMovies.data.results);
+    };
+    reqUpcomingMovies();
+  }, []);
+
+  const [topRated, setTopRated] = useState([]);
+
+  useEffect(() => {
+    const reqTopRated=async()=> {
+      const getTopRated = await axios.get("/movie/top_rated");
+      setTopRated(getTopRated.data.results);
+    };
+    reqTopRated();
+  }, []);
+
+
   return (
     <>
       <div className="container mx-auto px-4 py-2 mb-10 ">
@@ -26,7 +61,7 @@ const HomePage = () => {
 
           <PosterSlider
             isDark
-            images={PremierImages}
+            images={popularMovies}
             title={"Premier"}
             subtitle={"Brands New releases Everday"}
           />
@@ -35,15 +70,13 @@ const HomePage = () => {
 
       <div className="container mx-auto px-4 ">
         <div>
-          
           <PosterSlider
-            images={PremierImages}
+            images={upcomingMovies}
             title={"Online Streaming Event"}
           />
         </div>
         <div className="mt-20">
-          
-          <PosterSlider images={PremierImages} title={"Outdoor Events"} />
+          <PosterSlider images={topRated} title={"Outdoor Events"} />
         </div>
       </div>
     </>

@@ -10,11 +10,11 @@ const PlaysFilter = (props) => {
            {open ?<BiChevronUp/> :<BiChevronDown/>} <span className={open ? "text-red-600":"text-grey-700"}>{props.title}</span>
           </Disclosure.Button>
           <Disclosure.Panel className="text-gray-500 ">
-          <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex items-center gap-3 flex-wrap ">
               {props.tags.map((tag)=>(
                       <>
                       <div className="border-2 border-grey-500 px-3 py-2">
-                       <span className="text-red-800">{tag}</span>
+                       <span className="text-red-600">{tag}</span>
                       </div>
                       </>
                   ))

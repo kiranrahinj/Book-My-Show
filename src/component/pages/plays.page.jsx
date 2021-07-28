@@ -48,10 +48,10 @@ const Play = () => {
             <h1 className="font-bold text-2xl">Filters</h1>
                <PlaysFilter title="date" tags={["today","tomarrow","today"]}/>
                
-               <PlaysFilter title="date" tags={["today","tomarrow","today"]}/>
+               <PlaysFilter title="language" tags={["marathi ","english","hindi"]}/>
                
-               <PlaysFilter title="date" tags={["today","tomarrow","today"]}/>
-               <PlaysFilter title="date" tags={["today","tomarrow","today"]}/>
+               <PlaysFilter title="categories" tags={["theatre"]}/>
+               <PlaysFilter title="genres" tags={["Drama ","comedy","historical"]}/>
         </div>
       </div> </div>
     </>

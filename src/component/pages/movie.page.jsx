@@ -1,18 +1,56 @@
-import React,{useContext} from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import Cast from "../cast/cast.component";
 import MovieHero from "../MovieHero/Movie.hero.component";
 
 //
 import PosterSlider from "../posterSlider/posterSlider.component";
-import images from "../config/images.config";
 
 
 //context
 import { MovieContext } from "../../context/movieContext";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+
+//slider
+import Slider from "react-slick";
+// Compoenent
+
 
 const Movie = () => {
-const {movie}=useContext(MovieContext)
+  const { movie } = useContext(MovieContext);
+  const { id } = useParams();
+
+  const [cast, setCast] = useState([]);
+  const [similarMovies, setSimilarMovies] = useState([]);
+  const [recommended, setRecommended] = useState([]);
+
+  useEffect(() => {
+    const reqCast = async () => {
+      const getCast = await axios.get(`/movie/${id}/credits`);
+      setCast(getCast.data.cast);
+    };
+    reqCast();
+  }, [id]);
+  useEffect(() => {
+    const requestSimilarMovies = async () => {
+      const getSimilarMovies = await axios.get(`/movie/${id}/similar`);
+      setSimilarMovies(getSimilarMovies.data.results);
+    };
+
+    requestSimilarMovies();
+  }, [id]);
+
+  useEffect(() => {
+    const requestRecommendedMovies = async () => {
+      const getRecommendedMovies = await axios.get(
+        `/movie/${id}/recommendations`
+      );
+      setRecommended(getRecommendedMovies.data.results);
+    };
+
+    requestRecommendedMovies();
+  }, [id]);
 
   const settings = {
     infinite: false,
@@ -47,15 +85,47 @@ const {movie}=useContext(MovieContext)
     ],
   };
 
+  const Castsettings = {
+    infinite: false,
+  
+    speed: 500,
+    slidesToShow: 7,
+    slidesToScroll: 3,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 3,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+        },
+      },
+    ],
+  };
+
   return (
     <>
       <MovieHero />
 
       <div className="container lg:w-2/3 lg:ml-16 p-2 ">
         <h1 className="text-2xl font-bold mb-2">About the movie</h1>
-        <p className=" font-normal  ">
-          {movie.overview}
-        </p>
+        <p className=" font-normal  ">{movie.overview}</p>
 
         <div className="my-5">
           <hr />
@@ -103,75 +173,38 @@ const {movie}=useContext(MovieContext)
           <hr />
         </div>
         <h1 className="text-2xl font-bold  my-8">Cast</h1>
-        <div className="flex  gap-3 my-8">
-          <Cast
-            img="https://in.bmscdn.com/iedb/artist/images/website/poster/large/ben-affleck-292-12-09-2017-05-12-16.jpg"
-            name="Ben Affleck"
-            role="batman"
-          />
-          <Cast
-            img="https://in.bmscdn.com/iedb/artist/images/website/poster/large/henry-cavill-23964-04-05-2020-04-25-14.jpg"
-            name="Henry Cavill "
-            role="superman"
-          />
-          <Cast
-            img="https://in.bmscdn.com/iedb/artist/images/website/poster/large/gal-gadot-11088-17-10-2017-11-45-36.jpg"
-            name="Gal Gadot"
-            role="wonder women"
-          />
-          <Cast
-            img="https://in.bmscdn.com/iedb/artist/images/website/poster/large/ray-fisher-1072729-17-10-2017-12-14-18.jpg"
-            name="Ray Fisher"
-            role="Cyborg"
-          />
-        </div>
-        <div className="my-8">
+
+        <Slider {...Castsettings}>
+          {" "}
+          {cast.map((castdata) => (
+            <Cast
+              img={`https://image.tmdb.org/t/p/original/${castdata.profile_path}`}
+              name={castdata.original_name}
+              role={castdata.character}
+            />
+          ))}
+        </Slider>
+
+        <div>
           <hr />
         </div>
-
-        <h1 className="text-2xl font-bold  my-8">Crew</h1>
-        <div className="flex  gap-3 my-8">
-          <Cast
-            img="https://in.bmscdn.com/iedb/artist/images/website/poster/large/ben-affleck-292-12-09-2017-05-12-16.jpg"
-            name="Ben Affleck"
-            role="batman"
-          />
-          <Cast
-            img="https://in.bmscdn.com/iedb/artist/images/website/poster/large/henry-cavill-23964-04-05-2020-04-25-14.jpg"
-            name="Henry Cavill "
-            role="superman"
-          />
-          <Cast
-            img="https://in.bmscdn.com/iedb/artist/images/website/poster/large/gal-gadot-11088-17-10-2017-11-45-36.jpg"
-            name="Gal Gadot"
-            role="wonder women"
-          />
-          <Cast
-            img="https://in.bmscdn.com/iedb/artist/images/website/poster/large/ray-fisher-1072729-17-10-2017-12-14-18.jpg"
-            name="Ray Fisher"
-            role="Cyborg"
+        <div className="mt-3">
+          <PosterSlider
+            config={settings}
+            images={similarMovies}
+            title={"You might also like"}
           />
         </div>
-        <div className="my-8">
+        <div >
           <hr />
         </div>
-
-        <PosterSlider
-          config={settings}
-          images={images}
-          title={"You might also like"}
-        />
-
-        <div className="my-6">
-          <hr />
+        <div className="mt-2">
+          <PosterSlider
+            config={settings}
+            images={recommended}
+            title={"BMS XCLUSIV"}
+          />
         </div>
-
-        <PosterSlider
-          config={settings}
-          images={images}
-          title={"BMS XCLUSIV"}
-        />
-
       </div>
     </>
   );

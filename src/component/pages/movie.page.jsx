@@ -80,7 +80,7 @@ const Movie = () => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          initialSlide: 2,
+          initialSlide: 0,
         },
       },
     ],
@@ -113,9 +113,9 @@ const Movie = () => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 2,
-          initialSlide: 2,
+          initialSlide:2,
         },
       },
     ],
@@ -177,7 +177,7 @@ const Movie = () => {
         <h1 className="text-2xl font-bold  my-8">Cast</h1>
 
         <Slider {...Castsettings}>
-          {" "}
+         
           {cast.map((castdata) => (
             <Cast
               img={`https://image.tmdb.org/t/p/original/${castdata.profile_path}`}

@@ -12,9 +12,7 @@ const MovieHero = () => {
         className="relative md:hidden w-full"
         style={{ height: "calc(180vw)" }}
       > 
-       <div className="absolute bottom-5 left-7">
-         <MovieInfo/>
-       </div>
+    
         <div className="w-full h-56 bg-opacity-50 absolute bg-black z-10 bottom-0" />
 
         <img
@@ -22,6 +20,9 @@ const MovieHero = () => {
           alt="poster"
           className="w-full h-full"
         />
+           <div className="absolute z-30 bottom-5 left-7">
+         <MovieInfo/>
+       </div>
       </div>
       {/*tab */}
       <div
@@ -29,7 +30,7 @@ const MovieHero = () => {
         style={{ height: "calc(100vw)" }}
       >
         <div className="w-full h-56 bg-opacity-50 absolute bg-black z-10 bottom-0" />
-        <div className="absolute bottom-5 ">
+        <div className="absolute z-30 bottom-5 ">
          <MovieInfo/>
        </div>
 

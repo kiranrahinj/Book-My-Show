@@ -16,17 +16,17 @@ const settings = {
     {
       breakpoint: 600,
       settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        initialSlide: 2,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        
       },
     },
     {
-      breakpoint: 480,
+      breakpoint: 500,
       settings: {
         slidesToShow: 3,
-        slidesToScroll: 1,
-        initialSlide: 2,
+        slidesToScroll: 3,
+       
       },
     },
   ],
